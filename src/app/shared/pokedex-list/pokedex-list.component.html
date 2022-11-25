@@ -1,0 +1,49 @@
+<div class="search-section" fxFlex="100%">
+  <app-search (emmitSearch)="getSearch($event)"></app-search>
+</div>
+<ng-container class="container">
+  <ng-template ngFor let-pokemon [ngForOf]="getAllPokemons">
+    <div
+      class="pokemon"
+      fxFlex.xl="47%"
+      fxFlex.lg="47%"
+      fxFlex.md="45%"
+      fxFlex.sm="100%"
+      fxFlex.xs="100%"
+    >
+      <a
+        fxLayout.sm="row"
+        fxLayoutAlign="space-between"
+        *ngIf="pokemon.results"
+      >
+        <section
+          class="pokemon-status"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+        >
+          <h2>
+            {{ pokemon[0].name | uppercase }}
+          </h2>
+          <ul *ngFor="let value of pokemon.status.types">
+            <li>
+              {{ value.type.name }}
+            </li>
+          </ul>
+        </section>
+
+        <section class="pokemon-image" fxLayoutAlign="start center">
+          <img
+            [src]="pokemon.status.sprites.other.dream_world.front_default"
+            [alt]="pokemon.name"
+          />
+        </section>
+      </a>
+    </div>
+  </ng-template>
+</ng-container>
+<img
+  src="assets/error.svg"
+  alt="Deu erro na mostragem do pokemon"
+  width="100%"
+  *ngIf="apiError"
+/>

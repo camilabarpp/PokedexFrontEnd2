@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<main>
+  <ng-template [ngIf]="isLoading">
+    <section class="pokemon-names" fxLayoutAlign="end end">
+      <h1 class="slideInLeft">{{ pokemon[0].name }}</h1>
+      <h2 class="slideInRight">{{ pokemon[0].name }}</h2>
+    </section>
+
+    <section class="pokemon-status">
+      <img
+        [src]="pokemon[0].image"
+        [alt]="pokemon[0].name"
+        class="slideInDown"
+      />
+
+      <article
+        class="pokemon-status-estatistics fadeIn"
+        fxLayout="column"
+        fxLayoutAlign="space-between"
+      >
+        <section>
+          <h3>Estatistícas</h3>
+          <ol>
+            <li
+              *ngFor="
+                let value of pokemon[0].statsName && pokemon[0].statsvalues
+              "
+              fxLayoutAlign="space-between"
+            >
+              {{ value }}
+
+              <strong>
+                {{ value }}
+              </strong>
+            </li>
+          </ol>
+        </section>
+      </article>
+    </section>
+  </ng-template>
+
+  <div fxLayoutAlign="center space-between">
+    <img
+      src="assets/error.svg"
+      alt="Página não encontrada"
+      width="100%"
+      *ngIf="apiError"
+    />
+  </div>
+
+  <ng-container class="container">
+    <ng-template ngFor let-pokemon [ngForOf]="getAllPokemons">
+      <div
+        class="pokemon"
+        fxFlex.xl="47%"
+        fxFlex.lg="47%"
+        fxFlex.md="45%"
+        fxFlex.sm="100%"
+        fxFlex.xs="100%"
+      >
+        <a
+          fxLayout.sm="row"
+          fxLayoutAlign="space-between"
+          *ngIf="pokemon.status"
+        >
+          <section
+            class="pokemon-status"
+            fxLayout="column"
+            fxLayoutAlign="start start"
+          >
+            <h2>
+              {{ pokemon.name | uppercase }}
+            </h2>
+            <ul *ngFor="let value of pokemon.status.types">
+              <li>
+                {{ value.type.name }}
+              </li>
+            </ul>
+          </section>
+
+          <section class="pokemon-image" fxLayoutAlign="start center">
+            <img
+              [src]="pokemon.status.sprites.other.dream_world.front_default"
+              [alt]="pokemon.name"
+            />
+          </section>
+        </a>
+      </div>
+    </ng-template>
+  </ng-container>
+</main>

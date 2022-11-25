@@ -1,0 +1,32 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
+import { Pokemon, Result, SpecificPokemon } from './PokemonModel';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PokedexApiService {
+  // private urlApi: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50';
+  private urlApi: string = 'http://localhost:8080/pokemons';
+
+  constructor(private _http: HttpClient) {}
+
+  get listAllPokemons(): Observable<any> {
+    return this._http.get<any>(this.urlApi).pipe(
+      tap((response) => response),
+      // tap((response) => {
+      //   response.results.map((responsePokemons: any) => {
+      //     this.getPokemons(responsePokemons.url).subscribe(
+      //       (response) => responsePokemons.results = response,
+      //       );
+      //       console.log(responsePokemons.status)
+      //   });
+      // })
+    );
+  }
+
+  public getPokemons(url: string): Observable<any> {
+    return this._http.get<any>(url).pipe(map((response) => response));
+  }
+}
