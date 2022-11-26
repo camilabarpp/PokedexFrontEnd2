@@ -14,25 +14,12 @@ export class DetailsComponent implements OnInit {
   public pokemon: any;
   public isLoading: boolean = false;
   public apiError: boolean = false;
-getAllPokemons: any;
+  getAllPokemons: any;
 
   constructor(
     private _activedRoute: ActivatedRoute,
     private _apiPokedexService: PokedexApiService
   ) {}
-
-  // ngOnInit(): void {
-  //   const id = this._activedRoute.snapshot.params['id'];
-  //   forkJoin(
-  //     this._apiPokedexService.getPokemons(`${this.urlPokemon}/${id}`)
-  //   ).subscribe(
-  //     (response) => {
-  //       this.pokemon = response;
-  //       this.isLoading = true;
-  //     },
-  //     (error) => (this.apiError = true)
-  //   );
-  // }
 
   ngOnInit(): void {
     const id = this._activedRoute.snapshot.params['id'];

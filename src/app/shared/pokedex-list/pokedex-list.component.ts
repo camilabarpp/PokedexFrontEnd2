@@ -10,36 +10,27 @@ import { Pokemon, SpecificPokemon } from 'src/app/service/PokemonModel';
   styleUrls: ['./pokedex-list.component.scss'],
 })
 export class PokedexListComponent implements OnInit {
-  private setAllPokemons: any;
   public getAllPokemons: any;
+  public listAllPokemons: Array<{ any: any }> = [];
 
   public apiError: boolean = false;
 
   constructor(private pokeApiService: PokedexApiService) {}
 
-  // ngOnInit(): void {
-  //   this.pokeApiService.listAllPokemons.subscribe(
-  //     (res) => {
-  //       this.setAllPokemons = res.results;
-  //       this.getAllPokemons = this.setAllPokemons;
-  //       console.log(res)
-  //     },
-  //     (error) => {
-  //       this.apiError = true;
-  //     }
-  //   );
-  // }
-
   ngOnInit(): void {
-    this.pokeApiService.listAllPokemons.subscribe((response) => {
-      this.setAllPokemons = response[0].results;
-      this.getAllPokemons = this.setAllPokemons
-      console.log(response[0].results[0].name);
-    });
+    this.pokeApiService.listAllPokemons.subscribe(
+      (response) => {
+        (this.listAllPokemons = response[0].results),
+          (this.getAllPokemons = this.listAllPokemons);
+      },
+      (error) => {
+        this.apiError = true;
+      }
+    );
   }
 
   public getSearch(value: string) {
-    const filter = this.setAllPokemons.filter((res: any) => {
+    const filter = this.listAllPokemons.filter((res: any) => {
       return !res.name.indexOf(value.toLowerCase());
     });
 

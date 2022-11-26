@@ -7,7 +7,6 @@ import { Pokemon, Result, SpecificPokemon } from './PokemonModel';
   providedIn: 'root',
 })
 export class PokedexApiService {
-  // private urlApi: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50';
   private urlApi: string = 'http://localhost:8080/pokemons';
 
   constructor(private _http: HttpClient) {}
@@ -15,14 +14,13 @@ export class PokedexApiService {
   get listAllPokemons(): Observable<any> {
     return this._http.get<any>(this.urlApi).pipe(
       tap((response) => response),
-      // tap((response) => {
-      //   response.results.map((responsePokemons: any) => {
-      //     this.getPokemons(responsePokemons.url).subscribe(
-      //       (response) => responsePokemons.results = response,
-      //       );
-      //       console.log(responsePokemons.status)
-      //   });
-      // })
+      tap((response) => {
+        response[0].results.map((responsePokemons: any) => {
+          this.getPokemons(responsePokemons.url).subscribe(
+            (response) => (responsePokemons.results = response)
+          );
+        });
+      })
     );
   }
 

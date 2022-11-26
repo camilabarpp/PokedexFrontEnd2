@@ -12,6 +12,7 @@
       fxFlex.xs="100%"
     >
       <a
+        [routerLink]="['details', pokemon.results.id]"
         fxLayout.sm="row"
         fxLayoutAlign="space-between"
         *ngIf="pokemon.results"
@@ -22,9 +23,9 @@
           fxLayoutAlign="start start"
         >
           <h2>
-            {{ pokemon[0].name | uppercase }}
+            {{ pokemon.name | uppercase }}
           </h2>
-          <ul *ngFor="let value of pokemon.status.types">
+          <ul *ngFor="let value of pokemon.results.types">
             <li>
               {{ value.type.name }}
             </li>
@@ -33,7 +34,7 @@
 
         <section class="pokemon-image" fxLayoutAlign="start center">
           <img
-            [src]="pokemon.status.sprites.other.dream_world.front_default"
+            [src]="pokemon.results.sprites.other.dream_world.front_default"
             [alt]="pokemon.name"
           />
         </section>
