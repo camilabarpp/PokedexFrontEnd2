@@ -17,27 +17,13 @@
         fxLayoutAlign="space-between"
         *ngIf="pokemon.results"
       >
-        <section
-          class="pokemon-status"
-          fxLayout="column"
-          fxLayoutAlign="start start"
-        >
-          <div>
-            <h2>
-              {{ pokemon.name | uppercase }}
-            </h2>
-          </div>
-          <div fxLayout="row" fxLayoutGap="20px">
-            <div>
-              <span>Abilities</span>
-              <ul *ngFor="let value of pokemon.results.abilities">
-                <li>
-                  {{ value.ability.name }}
-                </li>
-              </ul>
-            </div>
+        <section class="pokemon-status" fxLayout="column">
+          <h2>
+            {{ pokemon.name | uppercase }}
+          </h2>
 
-            <div>
+          <div fxLayout="row" fxLayoutGap="20px">
+            <div fxLayout="column">
               <span>Powers</span>
               <ul *ngFor="let value of pokemon.results.types">
                 <li>
@@ -45,8 +31,31 @@
                 </li>
               </ul>
             </div>
+
+            <div fxLayout="row" fxLayoutGap="20px">
+              <div fxLayout="column">
+                <span>Habilities</span>
+                <ul *ngFor="let value of pokemon.results.types">
+                  <li>
+                    {{ value.type.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
+
+        <!-- <section
+          class="pokemon-status"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          <ul *ngFor="let value of pokemon.results.abilities">
+            <li>
+              {{ value.ability.name }}
+            </li>
+          </ul>
+        </section> -->
 
         <section class="pokemon-image" fxLayoutAlign="start center">
           <img
