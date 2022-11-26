@@ -15,7 +15,7 @@ export class PokedexApiService {
     return this._http.get<any>(this.urlApi).pipe(
       tap((response) => response),
       tap((response) => {
-        response[0].results.map((responsePokemons: any) => {
+        response.results.map((responsePokemons: any) => {
           this.getPokemons(responsePokemons.url).subscribe(
             (response) => (responsePokemons.results = response)
           );

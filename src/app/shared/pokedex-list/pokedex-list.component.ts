@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { response } from 'express';
+import { forkJoin, pipe } from 'rxjs';
 import { PokedexApiService } from 'src/app/service/pokedex-api.service';
 import { Pokemon, SpecificPokemon } from 'src/app/service/PokemonModel';
 
@@ -20,8 +21,9 @@ export class PokedexListComponent implements OnInit {
   ngOnInit(): void {
     this.pokeApiService.listAllPokemons.subscribe(
       (response) => {
-        (this.listAllPokemons = response[0].results),
+        (this.listAllPokemons = response.results),
           (this.getAllPokemons = this.listAllPokemons);
+          console.log(response)
       },
       (error) => {
         this.apiError = true;
