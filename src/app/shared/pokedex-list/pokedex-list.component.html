@@ -22,14 +22,30 @@
           fxLayout="column"
           fxLayoutAlign="start start"
         >
-          <h2>
-            {{ pokemon.name | uppercase }}
-          </h2>
-          <ul *ngFor="let value of pokemon.results.types">
-            <li>
-              {{ value.type.name }}
-            </li>
-          </ul>
+          <div>
+            <h2>
+              {{ pokemon.name | uppercase }}
+            </h2>
+          </div>
+          <div fxLayout="row" fxLayoutGap="20px">
+            <div>
+              <span>Abilities</span>
+              <ul *ngFor="let value of pokemon.results.abilities">
+                <li>
+                  {{ value.ability.name }}
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <span>Powers</span>
+              <ul *ngFor="let value of pokemon.results.types">
+                <li>
+                  {{ value.type.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section class="pokemon-image" fxLayoutAlign="start center">
